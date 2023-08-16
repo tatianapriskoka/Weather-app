@@ -1,17 +1,32 @@
 
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { optionType } from "./types/index";
 
 const App = (): JSX.Element => {
   const BASE_URL = 'http://api.openweathermap.org';
+  const [city, setCity] = useState<optionType | null>(null);
   const [term, setTerm] = useState<string>('');
   const [options, setOptions] = useState<[]>([]);
 
-  const getSearchOptions = async () => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${process.env.REACT_APP_API_KEY
-      }`)
-      .then(res => res.json())
-      .then(data => console.log(setOptions(data)));
+  const getSearchOptions = async (value: string) => {
+    fetch(
+      `${BASE_URL}/geo/1.0/direct?q=${value.trim()}&limit=5&lang=en&appid=4f83d528c4a8622b877927889e3cbcda`
+    )
+      .then((res) => res.json())
+      .then((data) => setOptions(data));
+  }
+  const getForecast = (city: optionType) => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&units=metric&appid=4f83d528c4a8622b877927889e3cbcda`
+    )
+      .then((res) => res.json())
+      .then((data) => console.log({ data }));
+  }
+
+
+  const onSubmit = () => {
+    if (!city) return
+    getForecast(city)
   }
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,12 +35,20 @@ const App = (): JSX.Element => {
     setTerm(value);
     if (value === '') return;
 
-    getSearchOptions();
+    getSearchOptions(value);
   }
 
   const onOptionSelect = (option: optionType) => {
-
+    console.log(option.name);
+    setCity(option);
   }
+
+  useEffect(() => {
+    if (city) {
+      setTerm(city.name)
+      setOptions([])
+    }
+  }, [city])
 
   return (
     <main className="flex justify-center items-center bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400 h-[100vh] w-full">
@@ -44,19 +67,22 @@ const App = (): JSX.Element => {
             onChange={onInputChange}
           />
 
+
           <ul className="absolute top-9 bg-white ml-1 rounded-b-md">
             {options.map((option: optionType, index: number) => (
               <li key={option.name + '-' + index}>
-                <button
-                  className="text-left text-sm w-full hover:bg-zinc-700 hover:text-white px-2 py-1 cursor-pointer"
+                <button className="text-left text-sm w-full hover:bg-zinc-700 hover:text-white px-2 py-1 cursor-pointer"
                   onClick={() => onOptionSelect(option)}
                 >
                   {option.name}
                 </button>
               </li>
             ))}
+
           </ul>
-          <button className="rounded-r-md border-2 border-zinc-100 hover:border-zinc-500 hover:text-zinc-500  text-zinc-100 px-2 py-1 cursor-pointer">
+          <button className="rounded-r-md border-2 border-zinc-100 hover:border-zinc-500 hover:text-zinc-500  text-zinc-100 px-2 py-1 cursor-pointer"
+            onClick={onSubmit}
+          >
             Search
           </button>
         </div>
