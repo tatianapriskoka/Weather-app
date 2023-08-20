@@ -11,14 +11,14 @@ export const useForecast = () => {
 
     const getSearchOptions = async (value: string) => {
         fetch(
-            `${BASE_URL}/geo/1.0/direct?q=${value.trim()}&limit=5&lang=en&appid=4f83d528c4a8622b877927889e3cbcda`
+            `${BASE_URL}/geo/1.0/direct?q=${value.trim()}&limit=5&lang=en&appid=${process.env.REACT_APP_API_KEY}`
         )
             .then((res) => res.json())
             .then((data) => setOptions(data));
     }
     const getForecast = (city: optionType) => {
         fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&units=metric&appid=4f83d528c4a8622b877927889e3cbcda`
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
         )
             .then((res) => res.json())
             .then((data) => {
