@@ -30,7 +30,7 @@ export type forecastType = {
             gust: number,
             deg: number,
         }
-        clounds: {
+        clouds: {
             all: number
         }
         pop: number,
