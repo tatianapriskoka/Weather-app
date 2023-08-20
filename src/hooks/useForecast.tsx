@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { optionType, forecastType } from "../types";
 
 export const useForecast = () => {
-    const BASE_URL = 'http://api.openweathermap.org';
+    const BASE_URL = 'https://api.openweathermap.org';
     const [city, setCity] = useState<optionType | null>(null);
     const [term, setTerm] = useState<string>('');
     const [options, setOptions] = useState<[]>([]);
