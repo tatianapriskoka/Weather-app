@@ -1,15 +1,15 @@
-This repository is using ReactJS, TypeScript and TailwindCSS. It also runs on node 18 (see .nvmrc) and has a formatter - prettier. If you're running this for the first time - please ensure you have nvm (node version manager).
+## Weather app
 
-## How To Run
 
-If you don't have nvm installed, run the following command:
-`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
-After you got nvm installed on your machine, run `nvm i` and then `nvm use` (to have the correct nodeJs version)
+![Screenshot (226)](https://github.com/tatianapriskoka/Weather-app/assets/114044978/29e00359-7a9a-45c1-a8a8-cde600f90be1)
+![Screenshot (227)](https://github.com/tatianapriskoka/Weather-app/assets/114044978/147212f3-460d-41c4-aa14-97a83eed5a46)
 
-Once you have the correct node version, run `npm i` to get all the required dependencies installed
 
-After everything is installed, run `npm run start` and navigate to http://localhost:3000
+## Technologies:
+<code><img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="40" height="40"/></code>
+ <code><img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg" title="TypeScript" alt="TypeScript" width="40" height="40"/> </code>
+<code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"></code>
+<code><img src= 'https://raw.githubusercontent.com/tailwindlabs/tailwindcss/HEAD/.github/logo-light.svg' alt="tailwindcss" width="120" height="40"></code>
 
-## API Calls
-
-Please Note: The OpenWeather API is using an API Key. In the repository you fill find a `.env.example` file which you need to copy/save as `.env` and paste the value of your API key (which you can get when you register on the OpenWeather API website).
+## Result
+https://weather-app-five-ochre.vercel.app/
